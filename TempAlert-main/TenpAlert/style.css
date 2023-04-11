@@ -1,0 +1,101 @@
+h1 {
+font-size: 48px;
+margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 50px;
+    color: #0077BE;
+    }
+
+.data {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+margin-bottom: 50px;
+}
+
+.box {
+background-color: #87CEEB;
+color: white;
+padding: 30px;
+margin: 20px;
+border-radius: 10px;
+width: 200px;
+text-align: center;
+}
+
+.box h2 {
+font-size: 36px;
+margin-bottom: 20px;
+}
+
+.buttons {
+display: flex;
+justify-content: center;
+}
+
+.button {
+background-color: #0077BE;
+color: white;
+padding: 10px 20px;
+margin: 10px;
+border-radius: 10px;
+text-decoration: none;
+font-size: 20px;
+transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+background-color: #003366;
+}
+
+body {
+	background-color: #e1f1ff;
+	font-family: Arial, sans-serif;
+    background-image: linear-gradient(to top, #FF9D53, #5B97FF);
+  }
+  
+  .container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+    background-color: #fff;
+    border-radius: 50px;
+  }
+  
+  h1 {
+	color: #1c73b4;
+  }
+  
+  .data {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+  }
+  
+  .temperature {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    position: relative;
+  }
+  
+  .label {
+	font-size: 18px;
+	color: #1c73b4;
+	margin-bottom: 5px;
+  }
+  
+  .value {
+	font-size: 48px;
+	color: #1c73b4;
+  }
+  
+  canvas {
+	width: 800px;
+	height: 400px;
+  }
+

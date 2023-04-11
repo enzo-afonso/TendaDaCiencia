@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html> <html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+	<title>Gráfico de Temperatura</title>
+	<link rel="stylesheet" type="text/css" href="tempatual.js">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Gráfico de Temperatura</h1>
+		<div class="date-selector">
+			<label for="date">Selecione a data:</label>
+			<input type="date" id="date" name="date">
+			<button id="btn-filter">Filtrar</button>
+		</div>
+		<canvas id="chart"></canvas>
+	</div>
+
+	<script src="tempatual.js"></script>
+</body>
+</html>

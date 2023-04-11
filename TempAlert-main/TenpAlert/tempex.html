@@ -1,0 +1,96 @@
+<html>
+<head>
+	<title>TemAlert</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset=”UTF-8″>
+
+</head>
+<body>
+	<div class="container">
+		<div style="text-align:center;">
+		<img src="titulo.png" alt="Titulo página">
+		</div>
+
+	<script type="module">
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+	    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
+	    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+	  
+	    const firebaseConfig = {
+	    apiKey: "AIzaSyC-PuRZzA8cw1xcetgVP-V2_UhDhbOZaLA",
+	    authDomain: "ledwifi-a54cf.firebaseapp.com",
+	    databaseURL: "https://ledwifi-a54cf-default-rtdb.firebaseio.com",
+	    projectId: "ledwifi-a54cf",
+	    storageBucket: "ledwifi-a54cf.appspot.com",
+	    messagingSenderId: "593740331417",
+	    appId: "1:593740331417:web:b6dfa956b65d9d48d8fb08",
+	    measurementId: "G-73FWH71DYF"
+	  };
+
+	    const app = initializeApp(firebaseConfig);
+	    const analytics = getAnalytics(app);
+
+	    const db = getDatabase();
+	    const tempRef = ref(db, '/tempExterna');
+
+        const temperatureChart =  document.getElementById("temperature-chart").getContext("2d");
+
+        const temperatureChartObj = new Chart(temperatureChart, {
+        type: "line",
+        data: {
+            labels: [],
+            datasets: [{
+            label: "Temperatura (°C)",
+            backgroundColor: "lightblue",
+            borderColor: "blue",
+            data: []
+            }]
+        },
+        options: {}
+        });
+
+        function updateTemperature() {
+        onValue(tempRef, (snapshot) => {
+            console.log(snapshot.val());
+            const data = snapshot.val();
+            const temp = data.valor;
+
+            document.getElementById("temperature-value").innerHTML = temp;
+
+            temperatureChartObj.data.labels.push(new Date().toLocaleTimeString());
+            temperatureChartObj.data.datasets[0].data.push(temp);
+            temperatureChartObj.update();
+        });
+        }
+
+        setInterval(updateTemperature, 10000);
+
+	</script>
+
+  <div class="container">
+    <h1>Temperatura externa</h1>
+    <h2>Temperatura em tempo real</h2>
+    <div class="data">
+      <div class="temperature">
+        <span class="label">Temperatura:</span>
+        <span class="value" id="temperature-value">0 °C</span>
+      </div>
+    </div>
+    <canvas id="temperature-chart"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="firebase-app.js"></script>
+  <script src="firebase-analytics.js"></script>
+  <script src="firebase-database.js"></script>
+  <script src="app.js"></script>
+		<div class="buttons">
+			<a href="index.html" class="button">Temperatura Interna</a>
+			<a href="tempex.html" class="button">Temperatura Externa</a>
+		</div>
+	</div>
+</body>
+</html>
+
+    
