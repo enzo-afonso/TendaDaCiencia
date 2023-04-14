@@ -1,0 +1,35 @@
+body {
+	background-color: blue;
+	color: white;
+	font-family: Arial, sans-serif;
+}
+
+.alert-container {
+	padding: 20px;
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	text-align: center;
+	padding: 10px;
+	border: 1px solid white;
+}
+
+th {
+	background-color: #555;
+}
+
+tr:nth-child(even) {
+	background-color: #ddd;
+}
+
+tr:hover {
+	background-color: #ccc;
+}
+
