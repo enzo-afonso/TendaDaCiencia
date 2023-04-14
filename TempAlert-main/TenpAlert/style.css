@@ -4,7 +4,7 @@ margin-bottom: 50px;
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 50px;
     color: #0077BE;
     }
@@ -99,3 +99,87 @@ body {
 	height: 400px;
   }
 
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .card h2 {
+    margin-top: 0;
+  }
+
+  .card p {
+    margin-bottom: 0;
+  }
+
+  body {
+    background-color: blue;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .alert-container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid white;
+  }
+  
+  th {
+    background-color: #555;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ddd;
+  }
+  
+  tr:hover {
+    background-color: #ccc;
+  }
+  
+  .card {
+    background-color: #EA8B7E;
+    border: 1px solid #E64B37;
+    border-radius: 20px;
+    border: 2px solid red;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+  
+  .card h2 {
+    font-size: 27px;
+    margin-bottom: 10px;
+    color:#E64B37;
+    text-align: left;
+  }
+  
+  .card h2 span {
+    font-size: 24px;
+    margin-right: 10px;
+    text-align: left;
+  }
+  
+  .card p {
+    font-size: 19px;
+    line-height: 1.5;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .alert-icon {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+  }

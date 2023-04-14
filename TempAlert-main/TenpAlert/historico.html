@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><h1>Histórico de Temperaturas</h1></title>
+	<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" href="logo.png">
+</head>
+
+<body>
+    <div class="container">
+		<div style="text-align:center;">
+		<img src="alertas.png" alt="Titulo página" width = 700>
+        <h1>Histórico de Temperaturas</h1>
+        <h2>Controle de temperaturas inadequadas</h2>
+        <div id="cards"></div>
+		<div class="buttons">
+			<a href="index.html" class="button">Temperatura Interna</a>
+			<a href="tempex.html" class="button">Temperatura Externa</a>
+			  <a href="historico.html" class="button">Historico de Temperaturas</a>
+		</div>
+		</div>
+    </div>
+	<!-- Div onde serão exibidos os cards -->
+	<div id="cards"></div>
+
+	<!-- Configurações do Firebase -->
+	<script>
+		var firebaseConfig = {
+            apiKey: "AIzaSyC-PuRZzA8cw1xcetgVP-V2_UhDhbOZaLA",
+            authDomain: "ledwifi-a54cf.firebaseapp.com",
+            databaseURL: "https://ledwifi-a54cf-default-rtdb.firebaseio.com",
+            projectId: "ledwifi-a54cf",
+            storageBucket: "ledwifi-a54cf.appspot.com",
+            messagingSenderId: "593740331417",
+            appId: "1:593740331417:web:b6dfa956b65d9d48d8fb08",
+            measurementId: "G-73FWH71DYF"
+		};
+
+		// Inicializando o Firebase
+		firebase.initializeApp(firebaseConfig);
+
+		// Referência à pasta do Firebase
+		var database = firebase.database();
+		var ref = database.ref("tempInadequada");
+
+		// Obtendo os dados da pasta
+		ref.once("value", function(snapshot) {
+			// Limpando a div de cards
+			$("#cards").empty();
+
+			// Iterando sobre as filhas da pasta
+			snapshot.forEach(function(childSnapshot) {
+				// Obtendo os dados da filha atual
+				var childData = childSnapshot.val();
+
+				// Criando o card com os dados da filha
+				var card = $("<div>").addClass("card");
+				var title = $("<h2>").text(" Alerta!");
+                var img = $("<img>").attr("src", "alert_icon.png").css("width", "30px").css("height", "30px");
+                var alertSpan = $("<span>").addClass("alert-icon").append(img);
+                title.prepend(alertSpan);
+				var text = $("<p>").text(childData);
+
+				// Adicionando o título e o texto ao card
+				card.append(title);
+				card.append(text);
+
+				// Adicionando o card à div
+				$("#cards").append(card);
+			});
+		});
+	</script>
+</body>
+</html>
