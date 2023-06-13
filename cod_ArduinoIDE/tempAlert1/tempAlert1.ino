@@ -10,8 +10,8 @@
 #define DHTPIN 2
 #define DHTTYPE DHT11
 #define ONE_WIRE_BUS 4
-#define WIFI_SSID "Marcos"
-#define WIFI_PASSWORD "mf37abcd"
+#define WIFI_SSID "TF"
+#define WIFI_PASSWORD "ti123fe2005."
 #define FIREBASE_HOST "https://ledwifi-a54cf-default-rtdb.firebaseio.com/"
 #define FIREBASE_AUTH "AIzaSyC-PuRZzA8cw1xcetgVP-V2_UhDhbOZaLA"
 
