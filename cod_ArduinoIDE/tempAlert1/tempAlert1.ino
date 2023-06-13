@@ -1,48 +1,37 @@
 #include <DHT.h>
-
-#define DHTPIN 2
-#define DHTTYPE DHT11
-
 #include <OneWire.h>
 #include <DallasTemperature.h>
-#define ONE_WIRE_BUS 4
-
-OneWire oneWire(ONE_WIRE_BUS);  
-DallasTemperature sensors(&oneWire);
-
+#include <NTPClient.h>
+#include <WiFiUdp.h>
+#include <TimeLib.h>
 #include <FirebaseESP8266.h>
 #include <ESP8266WiFi.h>
 
-#define WIFI_SSID "ACASSIA 2Ghz"
-#define WIFI_PASSWORD "cadeocachorro"
-
+#define DHTPIN 2
+#define DHTTYPE DHT11
+#define ONE_WIRE_BUS 4
+#define WIFI_SSID "Marcos"
+#define WIFI_PASSWORD "mf37abcd"
 #define FIREBASE_HOST "https://ledwifi-a54cf-default-rtdb.firebaseio.com/"
 #define FIREBASE_AUTH "AIzaSyC-PuRZzA8cw1xcetgVP-V2_UhDhbOZaLA"
 
 FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
-
-#include <NTPClient.h>
-#include <WiFiUdp.h>
-
-#include <TimeLib.h>
-
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "pool.ntp.org");
-
 String dateTime;
-
-int buzzer = 5; // Pino D1
-
-DHT dht(DHTPIN, DHTTYPE);
-
-int a = 0;
-float valorTemp = 0;
-bool tempInadequada = false;
 String tempoInicial;
 String tempoFinal;
 
+OneWire oneWire(ONE_WIRE_BUS);  
+DallasTemperature sensors(&oneWire);
+DHT dht(DHTPIN, DHTTYPE);
+NTPClient timeClient(ntpUDP, "pool.ntp.org");
+
+int buzzer = 5;
+int a = 0;
+float valorTemp = 0;
+bool tempInadequada = false;
 
 void setup() {
   Serial.begin(9600);
@@ -55,7 +44,7 @@ void setup() {
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
 
   timeClient.begin();
-  timeClient.setTimeOffset(-10800); // -10800 => GMT -3
+  timeClient.setTimeOffset(-10800); 
 }
 
 void loop() {
@@ -63,7 +52,6 @@ void loop() {
 
   sensors.requestTemperatures();
   float t = sensors.getTempCByIndex(0);
-
   float tempEx = dht.readTemperature();
 
   
@@ -78,43 +66,33 @@ void loop() {
   Firebase.setFloat(fbdo, "/temperatura/valor", t);
   Firebase.setFloat(fbdo, "/tempExterna/valor", tempEx);
 
-  //sendFloatDataToFirebase("/tempInadequada/valor", t);
-  //sendStringDataToFirebase("/tempInadequada/horario", dateTime);
-
-
-  int i = 0;
-
 
   if (t < 2 || t > 8) {
     
     if (a == 0) {
-      //tempoInicial = getCurrentTime();
       tempoInicial = timeStamp(tempoInicial);
       tempInadequada = true;
     }
     tempoFinal = timeStamp(tempoFinal);
-    while (i < 10){
-      tone(buzzer, 1350); 
-      delay(150);
-      tone(buzzer, 1050); 
-      delay(150);
-      i = i +1;
-    }
+
+    // alarme(buzzer);
+ 
     valorTemp = valorTemp + t;
     a = a+1;
 
-  }else if (tempInadequada == true){
-    noTone(buzzer);
+  }
+  else if (tempInadequada == true) {
     float tempMedia = valorTemp/a;
     String dados = String("As vacinas ficaram do dia " + String(tempoInicial) + " até o dia " + String(tempoFinal) + " a uma temperatura média de " + String(tempMedia) + "°C! Tenha cuidado!");
-    //Firebase.pushString(fbdo, "/tempInadequada", dados);
     sendStringDataToFirebase("/tempInadequada", dados);
     tempInadequada = false;
     a = 0;
-  } else {
+    valorTemp = 0;
     noTone(buzzer);
   }
-
+  else {
+    noTone(buzzer);
+  }
 }
 
 void initWifi() {
@@ -143,6 +121,17 @@ String timeStamp(String dateTime) {
 }
 
 String getCurrentTime() {
-  time_t now = time(nullptr); // obter a hora atual como um objeto "time_t"
-  return String(hour(now)) + ":" + String(minute(now)) + ":" + String(second(now)); // retornar a hora atual em formato de string
+  time_t now = time(nullptr);
+  return String(hour(now)) + ":" + String(minute(now)) + ":" + String(second(now));
+}
+
+void alarme(int buzzer) {
+  int i = 0;
+  while (i < 10){
+    tone(buzzer, 1350); 
+    delay(150);
+    tone(buzzer, 1050); 
+    delay(150);
+    i = i +1;
+  }
 }

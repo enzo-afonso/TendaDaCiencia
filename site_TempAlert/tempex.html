@@ -1,16 +1,16 @@
 <html>
 <head>
-	<title>TemAlert</title>
+	<title>Temperatura Externa</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="icon" href="logo.png">
-	<meta charset=”UTF-8″>
+  <link rel="icon" href="imagens/logo.png">
+  <meta charset=”UTF-8″>
 
 </head>
 <body>
 	<div class="container">
 		<div style="text-align:center;">
-		<img src="titulo.png" alt="Titulo página">
+		<img src="imagens/titulo.png" alt="Titulo página">
 		</div>
 
 	<script type="module">
@@ -34,7 +34,7 @@
 	    const analytics = getAnalytics(app);
 
 	    const db = getDatabase();
-	    const tempRef = ref(db, '/temperatura');
+	    const tempRef = ref(db, '/tempExterna');
 
         const temperatureChart =  document.getElementById("temperature-chart").getContext("2d");
 
@@ -42,15 +42,12 @@
         type: "line",
         data: {
             labels: [],
-            datasets: [
-			{
-            	label: "Temperatura (°C)",
-            	backgroundColor: "lightblue",
-            	borderColor: "blue",
-            	data: []
-            }
-			
-			]
+            datasets: [{
+            label: "Temperatura (°C)",
+            backgroundColor: "lightblue",
+            borderColor: "blue",
+            data: []
+            }]
         },
         options: {}
         });
@@ -71,37 +68,15 @@
 
         setInterval(updateTemperature, 10000);
 
-        // Criar uma referência ao local do Firebase Realtime Database que contém o dado desejado
-var dataRef = firebase.database().ref('conexao');
-
-// Escutar as alterações do valor do dado
-dataRef.on('value', function(snapshot) {
-
-  var card = document.createElement('div');
-  card.classList.add('card');
-  var content = document.createElement('p');
-  content.textContent = conexao; // O valor do dado do Firebase
-  
-  // Adicionar o conteúdo ao card
-  card.appendChild(content);
-  
-  // Adicionar o card à página
-  var container = document.getElementById('card-container');
-  container.appendChild(card);
-
-});
-      
-        
-
 	</script>
-  <div id="card-container"></div>
+
   <div class="container">
-    <h1>Temperatura interna</h1>
+    <h1>Temperatura externa</h1>
     <h2>Temperatura em tempo real</h2>
     <div class="data">
       <div class="temperature">
         <span class="label">Temperatura:</span>
-        <span class="value" id="temperature-value">0 °C </p></span> 
+        <span class="value" id="temperature-value">0 °C</span>
       </div>
     </div>
     <canvas id="temperature-chart"></canvas>
@@ -109,13 +84,13 @@ dataRef.on('value', function(snapshot) {
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="firebase-app.js"></script>
   <script src="firebase-analytics.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js"></script>
+  <script src="firebase-database.js"></script>
   <script src="app.js"></script>
-  <div class="buttons">
-    <a href="index.html" class="button">Temperatura Interna</a>
-    <a href="tempex.html" class="button">Temperatura Externa</a>
-    <a href="historico.html" class="button">Historico de Temperaturas</a>
-  </div>
+		<div class="buttons">
+			<a href="index.html" class="button">Temperatura Interna</a>
+			<a href="tempex.html" class="button">Temperatura Externa</a>
+      <a href="historico.html" class="button">Historico de Temperaturas</a>
+		</div>
 	</div>
 </body>
 </html>

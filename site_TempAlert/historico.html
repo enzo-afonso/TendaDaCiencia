@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><h1>Histórico de Temperaturas</h1></title>
+	<title>Histórico de Temperaturas</title>
 	<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="icon" href="logo.png">
+	<link rel="icon" href="imagens/logo.png">
 </head>
 
 <body>
     <div class="container">
 		<div style="text-align:center;">
-		<img src="alertas.png" alt="Titulo página" width = 700>
+		<img src="imagens/Alertas.png" alt="Titulo página" width = 700>
         <h1>Histórico de Temperaturas</h1>
         <h2>Controle de temperaturas inadequadas</h2>
         <div id="cards"></div>
@@ -59,7 +59,7 @@
 				// Criando o card com os dados da filha
 				var card = $("<div>").addClass("card");
 				var title = $("<h2>").text(" Alerta!");
-                var img = $("<img>").attr("src", "alert_icon.png").css("width", "30px").css("height", "30px");
+                var img = $("<img>").attr("src", "imagens/alert_icon.png").css("width", "30px").css("height", "30px");
                 var alertSpan = $("<span>").addClass("alert-icon").append(img);
                 title.prepend(alertSpan);
 				var text = $("<p>").text(childData);
