@@ -71,8 +71,30 @@
 
         setInterval(updateTemperature, 10000);
 
-	</script>
+        // Criar uma referência ao local do Firebase Realtime Database que contém o dado desejado
+var dataRef = firebase.database().ref('conexao');
 
+// Escutar as alterações do valor do dado
+dataRef.on('value', function(snapshot) {
+
+  var card = document.createElement('div');
+  card.classList.add('card');
+  var content = document.createElement('p');
+  content.textContent = conexao; // O valor do dado do Firebase
+  
+  // Adicionar o conteúdo ao card
+  card.appendChild(content);
+  
+  // Adicionar o card à página
+  var container = document.getElementById('card-container');
+  container.appendChild(card);
+
+});
+      
+        
+
+	</script>
+  <div id="card-container"></div>
   <div class="container">
     <h1>Temperatura interna</h1>
     <h2>Temperatura em tempo real</h2>
@@ -87,7 +109,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="firebase-app.js"></script>
   <script src="firebase-analytics.js"></script>
-  <script src="firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js"></script>
   <script src="app.js"></script>
   <div class="buttons">
     <a href="index.html" class="button">Temperatura Interna</a>

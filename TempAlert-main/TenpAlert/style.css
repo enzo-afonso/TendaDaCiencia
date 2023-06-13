@@ -183,3 +183,18 @@ body {
     margin-right: 5px;
     vertical-align: middle;
   }
+
+/* Estilos para o card */
+#status-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para o texto do card */
+#status-card p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
